@@ -17,6 +17,8 @@ public class AppleTree : MonoBehaviour {
 	// Rate in which the tree drops apples
 	public float appleDropRate;
 
+    public float difficultyRate;
+
 	bool canJuke = true;
 
 	int direction = 1;
@@ -33,8 +35,11 @@ public class AppleTree : MonoBehaviour {
 
 	void DropApple() {
 		Invoke ("DropApple", appleDropRate);
+        appleDropRate -= difficultyRate;
+        appleDropRate = Mathf.Max(0.5f, appleDropRate);
+        speed += difficultyRate;
 
-		var newApple = GameObject.Instantiate (apple);
+        var newApple = GameObject.Instantiate (apple);
 		newApple.transform.position = appleSpawnPoint.position;
 	}
 
